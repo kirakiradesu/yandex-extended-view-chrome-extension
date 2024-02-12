@@ -1,0 +1,19 @@
+.game-card__graphic > .game-quality-score.game-badges__game-quality-badge {
+  width: calc(100% - 16px);
+  pointer-events: auto;
+  cursor: help;
+}
+.game-card__graphic .game-quality-score__value {
+  width: 100% !important;
+  justify-content: space-around;
+  z-index: 999;
+}
+
+.game-quality-score__value.new{
+  background-color: rgba(254, 191, 55, .85);
+  color: #000;
+}
+
+/* .game-quality-score__value > div:not(:last-child)::after {
+  content: "·";
+} */

@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "YaGames view for Developer",
+  "version": "1.0",
+  "description": "Тут, возможно что то будет",
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://yandex.ru/games/*"],
+      "exclude_matches": ["https://yandex.ru/games/app/*"],
+      "js": ["contentScript.js"],
+      "css": ["contentScript.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
