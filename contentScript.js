@@ -114,45 +114,34 @@ async function onInit() {
   const initData = JSON.parse(
     document.getElementById("__appState__").innerText
   );
-  categories = [...initData.currentFeed.categoriesLinking];
   console.log("initData", initData);
 
-  for (let i = 0; i < categories.length; i++) {
-    const category = categories[i];
-    const categoryElement = document.querySelector(
-      `.category[data-name="${category.name}"]`
-    );
-    // console.log("categoryElement", categoryElement, category.name);
-    if (!categoryElement) {
-      continue;
-    }
-    categoryElement.innerHTML += `
+  if (
+    initData.currentFeed.categoriesLinking &&
+    initData.currentFeed.categoriesLinking.length > 0
+  ) {
+    categories = [...initData.currentFeed.categoriesLinking];
+    for (let i = 0; i < categories.length; i++) {
+      const category = categories[i];
+      const categoryElement = document.querySelector(
+        `.category[data-name="${category.name}"]`
+      );
+      // console.log("categoryElement", categoryElement, category.name);
+      if (!categoryElement) {
+        continue;
+      }
+      categoryElement.innerHTML += `
      <span class="category__counter" data-count="${category.gamesCount}" data-nosnippet="true"></span>
     `;
+    }
   }
 
-  const path = window.location.pathname;
-  let key;
-
-  if (path.includes("/games/category/")) {
-    const segments = path.split("/");
-    key = segments[segments.indexOf("category") + 1];
-  } else if (path.includes("/games/tag/")) {
-    key = "tag";
-  } else if (path.startsWith("/games/")) {
-    key = "common";
-  }
-  const tempArr = [...initData.feedsData[key][0].items];
-
-  for (let i = 0; i < tempArr.length; i++) {
-    cache[tempArr[i].appID] = tempArr[i];
-  }
-  // console.log("init cache", cache);
   renderBadges();
 }
 
 function renderBadges() {
   document
+    .querySelector("#feeds")
     .querySelectorAll(".game-card:not([data-view-ready])")
     .forEach(async (element) => {
       // const template = document.createElement("template");
@@ -188,9 +177,6 @@ function renderBadges() {
             )} дней назад">📅 ${timelife(props.firstPublished)} д</div>`
           : ""
       }
-
-      
-    
     `;
 
       const gameCardId = element.getAttribute("data-testid").split("-")[1];
@@ -198,7 +184,7 @@ function renderBadges() {
         ? cache[gameCardId]
         : await loadGameInfo(gameCardId);
 
-      console.log("render data", data);
+      // console.log("render data", data);
       // console.log(
       //   `Game with ID ${gameCardId} is ${
       //     cache[gameCardId] ? "in" : "not in"
