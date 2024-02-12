@@ -6,7 +6,7 @@
 .game-card__graphic .game-quality-score__value {
   width: 100% !important;
   justify-content: space-around;
-  z-index: 999;
+  z-index: 99;
 }
 
 .game-quality-score__value.new{
