@@ -1,0 +1,1 @@
+# yandex-extended-view-chrome-extension
