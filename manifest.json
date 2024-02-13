@@ -13,6 +13,12 @@
       "js": ["contentScript.js"],
       "css": ["contentScript.css"],
       "run_at": "document_idle"
+    },
+  {
+      "matches": ["https://games.yandex.ru/console/application/*"],
+      "js": ["developerСonsole.js"],
+      "css": ["developerСonsole.css"],
+      "run_at": "document_idle"
     }
   ],
   "action": {
