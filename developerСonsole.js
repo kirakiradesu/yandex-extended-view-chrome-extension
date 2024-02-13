@@ -6,14 +6,10 @@ overlayPreview.className = "overlay-preview";
 
 document.body.appendChild(overlayPreview);
 
-const thumbnailsContainer = document.querySelector(".tabs__tab_mobile");
-const tabsContentParent = thumbnailsContainer.closest(".tabs__content");
+document.body.addEventListener("click", (e) => {
+  if (e.target.className !== "form-attach__image") return;
 
-tabsContentParent.addEventListener("click", (e) => {
-const currentImageSrc = e.target.src;
-  if (!currentImageSrc) return;
-
-  overlayPreview.innerHTML = `<img src="${currentImageSrc}" style="max-width: 100vw; max-height: 100vh;">`;
+  overlayPreview.innerHTML = `<img src="${e.target.src}" style="max-width: 100vw; max-height: 100vh;">`;
   overlayPreview.style.display = "flex";
 });
 
